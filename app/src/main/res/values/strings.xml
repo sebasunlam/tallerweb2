@@ -4,4 +4,6 @@
     <string name="ErrorProduct">Ocurrio un error al intentar obtener el producto</string>
     <string name="ErrorDescription">Ocurrio un error al intentar obtener la descripcion del producto</string>
     <string name="ErrorHttp">Ocurrio un error de comunicacion</string>
+    <string name="NotFoundTitle">Ups!</string>
+    <string name="NotFoundMessage">No se encontraron resultados para su busqueda</string>
 </resources>

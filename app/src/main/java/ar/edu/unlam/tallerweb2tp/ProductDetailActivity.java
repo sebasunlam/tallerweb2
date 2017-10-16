@@ -37,34 +37,29 @@ public class ProductDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_product_detail);
         ButterKnife.bind(this);
 
+        manageProductCall();
+
+
+    }
+
+    private void manageProductCall() {
+
         Client.getProduct(getIntent().getStringExtra("productId"), new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful()) {
 
                     Product product = response.body();
+
                     txtTitulo.setText(product.getTitle());
-
-                    Client.getDescripcion(product.getId(), new Callback<Descripcion>() {
-                        @Override
-                        public void onResponse(Call<Descripcion> call, Response<Descripcion> response) {
-                            if (response.isSuccessful())
-                                txtDescripcion.setText(response.body().getPlainText());
-                            else
-                                Dialogs.alertDialog(ProductDetailActivity.this, errorTitle, errorDescription).show();
-                        }
-
-                        @Override
-                        public void onFailure(Call<Descripcion> call, Throwable t) {
-                            Dialogs.alertDialog(ProductDetailActivity.this, errorTitle, errorHttp).show();
-                        }
-                    });
 
                     Picasso.with(ProductDetailActivity.this)
                             .load(product.getPictures().get(0).getUrl())
                             .placeholder(R.drawable.image_holder)
                             .error(R.drawable.descarga)
                             .into(image);
+
+                    manageDescription(product.getId());
                 } else {
 
                     Dialogs.alertDialog(ProductDetailActivity.this, errorTitle, errorProduct).show();
@@ -73,9 +68,27 @@ public class ProductDetailActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
+
+
                 Dialogs.alertDialog(ProductDetailActivity.this, errorTitle, errorHttp).show();
             }
         });
+    }
 
+    private void manageDescription(String productId) {
+        Client.getDescripcion(productId, new Callback<Descripcion>() {
+            @Override
+            public void onResponse(Call<Descripcion> call, Response<Descripcion> response) {
+                if (response.isSuccessful())
+                    txtDescripcion.setText(response.body().getPlainText());
+                else
+                    Dialogs.alertDialog(ProductDetailActivity.this, errorTitle, errorDescription).show();
+            }
+
+            @Override
+            public void onFailure(Call<Descripcion> call, Throwable t) {
+                Dialogs.alertDialog(ProductDetailActivity.this, errorTitle, errorHttp).show();
+            }
+        });
     }
 }
