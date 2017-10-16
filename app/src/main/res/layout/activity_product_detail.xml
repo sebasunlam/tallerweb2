@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ar.edu.unlam.tallerweb2tp.ProductDetailActivity">
+
+    <ImageView
+        android:id="@+id/imgPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:src="@drawable/image_holder"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        tools:text="Titulo del producto"
+        android:padding="5dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:id="@+id/txtTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgPrincipal"/>
+    <ImageButton
+        android:id="@+id/btnComprar"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_attach_money_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitulo"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"/>
+
+    <ImageButton
+        android:id="@+id/btnFavoritos"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_favorite_border_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitulo"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:id="@+id/txtDescripcion"
+        tools:text="Descripcion del producto"
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnComprar"/>
+
+</RelativeLayout>

@@ -1,17 +1,16 @@
-
 package ar.edu.unlam.tallerweb2tp.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class City_ {
+/**
+ * Created by spardo on 16/10/17.
+ */
+
+public class Result {
 
     @SerializedName("id")
-    @Expose
     private String id;
-    @SerializedName("name")
-    @Expose
-    private String name;
 
     public String getId() {
         return id;
@@ -20,13 +19,4 @@ public class City_ {
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

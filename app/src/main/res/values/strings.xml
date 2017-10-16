@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Open ML</string>
+    <string name="Error">Error</string>
+    <string name="ErrorProduct">Ocurrio un error al intentar obtener el producto</string>
+    <string name="ErrorDescription">Ocurrio un error al intentar obtener la descripcion del producto</string>
+    <string name="ErrorHttp">Ocurrio un error de comunicacion</string>
 </resources>
