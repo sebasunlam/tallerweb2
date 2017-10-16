@@ -7,42 +7,35 @@
     android:padding="10dp"
     tools:context="ar.edu.unlam.tallerweb2tp.MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/waitDialog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:indeterminate="true"
-            android:visibility="invisible"
-            tools:visibility="visible"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.design.widget.TextInputLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/textInputLayoutSearch"
-            app:errorEnabled="true">
-            <EditText
-                android:id="@+id/txtSearch"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <EditText
+            android:id="@+id/txtSearch"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
 
 
-        <ImageButton
-            android:id="@+id/btnSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/textInputLayoutSearch"
-            android:src="@drawable/ic_search_black_24dp" />
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textInputLayoutSearch"
+        android:src="@drawable/ic_search_black_24dp" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        android:id="@+id/progressMain"/>
 
 
 </RelativeLayout>

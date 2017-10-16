@@ -33,10 +33,10 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.txtSearch)
     EditText txtSearch;
-    @BindView(R.id.waitDialog)
-    RelativeLayout waitDialog;
     @BindView(R.id.textInputLayoutSearch)
     TextInputLayout textInputLayoutSearch;
+    @BindView(R.id.progressMain)
+    ProgressBar progressMain;
 
 
     @Override
@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
     public void search() {
         textInputLayoutSearch.setError(null);
         if (!txtSearch.getText().toString().isEmpty()){
-            waitDialog.setVisibility(View.VISIBLE);
+            progressMain.setVisibility(View.VISIBLE);
             executeSearch();
         }else{
             textInputLayoutSearch.setError("Debe ingresar parametros de busqueda");
@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity {
 
 
     private void executeSearch(){
+
         Client.search(txtSearch.getText().toString(), new Callback<ProductSearchResult>() {
             @Override
             public void onResponse(Call<ProductSearchResult> call, Response<ProductSearchResult> response) {
@@ -78,16 +79,16 @@ public class MainActivity extends BaseActivity {
                         startActivity(intent);
                     }
 
-                    waitDialog.setVisibility(View.INVISIBLE);
+                    progressMain.setVisibility(View.INVISIBLE);
                 } else {
-                    waitDialog.setVisibility(View.INVISIBLE);
+                    progressMain.setVisibility(View.INVISIBLE);
                     Dialogs.alertDialog(MainActivity.this, errorTitle, errorHttp);
                 }
             }
 
             @Override
             public void onFailure(Call<ProductSearchResult> call, Throwable t) {
-                waitDialog.setVisibility(View.INVISIBLE);
+                progressMain.setVisibility(View.INVISIBLE);
                 Dialogs.alertDialog(MainActivity.this, errorTitle, errorHttp).show();
             }
         });
