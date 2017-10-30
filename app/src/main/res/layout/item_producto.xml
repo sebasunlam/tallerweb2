@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imgPrincipal"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        tools:src="@drawable/image_holder"
+        android:contentDescription="@string/imagen_producto" />
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgPrincipal"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="5dp"
+        android:textColor="@color/primary_text"
+        android:textSize="15dp"
+        tools:text="Titulo del producto" />
+    <TextView
+        android:id="@+id/txtPrecio"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitulo"
+        android:layout_toRightOf="@+id/imgPrincipal"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="5dp"
+        android:textColor="@color/primary_text"
+        android:textSize="10dp"
+        tools:text="5000$" />
+    <ImageButton
+        android:id="@+id/btnComprar"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_arrow_forward_black_24dp" />
+
+</RelativeLayout>

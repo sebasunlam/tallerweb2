@@ -6,4 +6,5 @@
     <string name="ErrorHttp">Ocurrio un error de comunicacion</string>
     <string name="NotFoundTitle">Ups!</string>
     <string name="NotFoundMessage">No se encontraron resultados para su busqueda</string>
+    <string name="imagen_producto">Imagen Producto</string>
 </resources>

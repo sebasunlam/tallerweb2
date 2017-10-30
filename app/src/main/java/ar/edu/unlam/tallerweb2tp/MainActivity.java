@@ -49,48 +49,20 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.btnSearch)
     public void search() {
         textInputLayoutSearch.setError(null);
-        if (!txtSearch.getText().toString().isEmpty()){
-            progressMain.setVisibility(View.VISIBLE);
-            executeSearch();
-        }else{
+        if (!txtSearch.getText().toString().isEmpty()) {
+            Intent intent = new Intent(MainActivity.this, ListProductoActivity.class);
+
+            intent.putExtra("q",txtSearch.getText().toString());
+            startActivity(intent);
+
+        } else {
             textInputLayoutSearch.setError("Debe ingresar parametros de busqueda");
         }
 
     }
 
     @OnTextChanged(R.id.txtSearch)
-    public void hideError(){
+    public void hideError() {
         textInputLayoutSearch.setError(null);
-    }
-
-
-    private void executeSearch(){
-
-        Client.search(txtSearch.getText().toString(), new Callback<ProductSearchResult>() {
-            @Override
-            public void onResponse(Call<ProductSearchResult> call, Response<ProductSearchResult> response) {
-                if (response.isSuccessful()) {
-                    Intent intent = new Intent(MainActivity.this, ProductDetailActivity.class);
-                    ProductSearchResult result = response.body();
-                    if(result.getResults().isEmpty())
-                        Dialogs.alertDialog(MainActivity.this, notFoundTitle,notFoundMessage ).show();
-                    else{
-                        intent.putExtra("productId", result.getResults().get(0).getId());
-                        startActivity(intent);
-                    }
-
-                    progressMain.setVisibility(View.INVISIBLE);
-                } else {
-                    progressMain.setVisibility(View.INVISIBLE);
-                    Dialogs.alertDialog(MainActivity.this, errorTitle, errorHttp);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductSearchResult> call, Throwable t) {
-                progressMain.setVisibility(View.INVISIBLE);
-                Dialogs.alertDialog(MainActivity.this, errorTitle, errorHttp).show();
-            }
-        });
     }
 }
