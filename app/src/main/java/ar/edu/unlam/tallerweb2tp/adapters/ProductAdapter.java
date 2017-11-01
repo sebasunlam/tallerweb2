@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +27,11 @@ import butterknife.ButterKnife;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private List<Result> productList;
+    private String query;
 
+    public ProductAdapter(String query){
+        this.query=query;
+    }
     public void showResults(List<Result> results) {
         this.productList = results;
         notifyDataSetChanged();
@@ -46,7 +52,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         final Result producto = this.productList.get(position);
 
         holder.titulo.setText(producto.getTitulo());
-        holder.precio.setText(producto.getPrecio());
+        holder.precio.setText(producto.getPrecio() + "$");
 
         Picasso.with(holder.imagen.getContext())
                 .load(producto.getImgUrl())
@@ -57,12 +63,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ProductDetailActivity.class);
-                intent.putExtra("productId", producto.getId());
-                view.getContext().startActivity(intent);
+                navigateOnClick(view,producto);
             }
         });
 
+        holder.detalle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateOnClick(view,producto);
+            }
+        });
+
+    }
+
+    private void navigateOnClick(View view,Result producto) {
+        Intent intent = new Intent(view.getContext(), ProductDetailActivity.class);
+        intent.putExtra("productId", producto.getId());
+        intent.putExtra("q", query);
+        view.getContext().startActivity(intent);
     }
 
     @Override
@@ -80,6 +98,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         TextView titulo;
         @BindView(R.id.txtPrecio)
         TextView precio;
+        @BindView(R.id.btnDetalle)
+        ImageButton detalle;
 
         //Este seria el "layout" del adapter
         public ViewHolder(View itemView) {

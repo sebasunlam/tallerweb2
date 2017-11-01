@@ -1,10 +1,12 @@
 package ar.edu.unlam.tallerweb2tp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,9 +39,22 @@ public class ProductDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_product_detail);
         ButterKnife.bind(this);
 
+        if (this.getSupportActionBar() != null)
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         manageProductCall();
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ProductDetailActivity.this, ListProductoActivity.class);
+                intent.putExtra("q", getIntent().getStringExtra("q"));
+                startActivity(intent);
+                break;
+        }
+        return true;
     }
 
     private void manageProductCall() {

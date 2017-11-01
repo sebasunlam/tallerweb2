@@ -33,10 +33,10 @@
         android:maxLines="2"
         android:padding="5dp"
         android:textColor="@color/primary_text"
-        android:textSize="10dp"
+        android:textSize="15dp"
         tools:text="5000$" />
     <ImageButton
-        android:id="@+id/btnComprar"
+        android:id="@+id/btnDetalle"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"

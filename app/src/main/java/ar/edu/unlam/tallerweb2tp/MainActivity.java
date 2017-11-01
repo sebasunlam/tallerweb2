@@ -35,8 +35,6 @@ public class MainActivity extends BaseActivity {
     EditText txtSearch;
     @BindView(R.id.textInputLayoutSearch)
     TextInputLayout textInputLayoutSearch;
-    @BindView(R.id.progressMain)
-    ProgressBar progressMain;
 
 
     @Override
@@ -51,14 +49,11 @@ public class MainActivity extends BaseActivity {
         textInputLayoutSearch.setError(null);
         if (!txtSearch.getText().toString().isEmpty()) {
             Intent intent = new Intent(MainActivity.this, ListProductoActivity.class);
-
             intent.putExtra("q",txtSearch.getText().toString());
             startActivity(intent);
-
         } else {
             textInputLayoutSearch.setError("Debe ingresar parametros de busqueda");
         }
-
     }
 
     @OnTextChanged(R.id.txtSearch)

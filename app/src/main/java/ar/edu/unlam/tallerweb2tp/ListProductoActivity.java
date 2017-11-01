@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -31,6 +32,8 @@ public class ListProductoActivity extends BaseActivity {
     RecyclerView listadoProductos;
     @BindView(R.id.txtNotFound)
     TextView notFound;
+    @BindView(R.id.waitLayout)
+    RelativeLayout waitLayout;
 
 
     ProductAdapter adapter;
@@ -41,6 +44,9 @@ public class ListProductoActivity extends BaseActivity {
         setContentView(R.layout.activity_list_producto);
         ButterKnife.bind(this);
 
+        if (this.getSupportActionBar() != null)
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         configurarLayoutManager();
     }
 
@@ -50,15 +56,14 @@ public class ListProductoActivity extends BaseActivity {
 
         executeSearch();
 
-        this.adapter = new ProductAdapter();
+        this.adapter = new ProductAdapter(getIntent().getStringExtra("q"));
         this.listadoProductos.setAdapter(adapter);
         this.adapter.notifyDataSetChanged();
 
     }
 
-
     private void executeSearch() {
-
+        waitLayout.setVisibility(View.VISIBLE);
         Client.search(getIntent().getStringExtra("q"), new Callback<ProductSearchResult>() {
             @Override
             public void onResponse(Call<ProductSearchResult> call, Response<ProductSearchResult> response) {
@@ -80,12 +85,14 @@ public class ListProductoActivity extends BaseActivity {
                     listadoProductos.setVisibility(View.GONE);
                     Dialogs.alertDialog(ListProductoActivity.this, errorTitle, errorHttp);
                 }
+                waitLayout.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ProductSearchResult> call, Throwable t) {
                 notFound.setVisibility(View.GONE);
                 listadoProductos.setVisibility(View.GONE);
+                waitLayout.setVisibility(View.GONE);
                 Dialogs.alertDialog(ListProductoActivity.this, errorTitle, errorHttp).show();
             }
         });
