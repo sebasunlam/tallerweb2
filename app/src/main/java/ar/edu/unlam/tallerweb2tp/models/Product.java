@@ -15,6 +15,8 @@ public class Product {
     private List<Descripcion> descriptions;
     @SerializedName("pictures")
     private List<Picture> pictures;
+    @SerializedName("price")
+    private String precio;
 
 
 
@@ -48,5 +50,13 @@ public class Product {
 
     public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public String getPrecio(){
+        return "$ " + precio;
+    }
+
+    public void setPrecio(String precio){
+        this.precio = precio;
     }
 }

@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb2tp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,8 @@ public class ProductDetailActivity extends BaseActivity {
     TextView txtDescripcion;
     @BindView(R.id.imgPrincipal)
     ImageView image;
+    @BindView(R.id.precio)
+    TextView precio;
 
 
     @Override
@@ -49,9 +52,7 @@ public class ProductDetailActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(ProductDetailActivity.this, ListProductoActivity.class);
-                intent.putExtra("q", getIntent().getStringExtra("q"));
-                startActivity(intent);
+                finish();
                 break;
         }
         return true;
@@ -67,6 +68,7 @@ public class ProductDetailActivity extends BaseActivity {
                     Product product = response.body();
 
                     txtTitulo.setText(product.getTitle());
+                    precio.setText(product.getPrecio());
 
                     Picasso.with(ProductDetailActivity.this)
                             .load(product.getPictures().get(0).getUrl())
